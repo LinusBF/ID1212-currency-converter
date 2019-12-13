@@ -36,26 +36,31 @@ Vue.component('converter', {
   data: function () {
     return {
       form: {
-        to: '',
-        from: '',
+        to: 'Choose',
+        from: 'Choose',
         amount: 0
-      }
+      },
+      converted: 0
     }
   },
   methods: {
     handleConvert: function (event) {
       event.preventDefault();
+      const that = this;
       axios({
         method: 'POST',
-        url: '/currency',
+        url: '/convert',
         json: true,
         data: {
-          name: this.form.name,
-          rate: parseFloat(this.form.rate)
+          from: this.form.from,
+          to: this.form.to,
+          amount: parseFloat(this.form.amount)
         }
+      }).then(function(res){
+        console.log(res.data);
+        that.converted = res.data.toFixed(2);
       });
-      this.form.name = '';
-      this.form.rate = '';
+      this.form.amount = 0;
     },
     handleFrom: function (event) {
       event.preventDefault();
@@ -68,23 +73,25 @@ Vue.component('converter', {
   },
   template: '<form class="form-inline">' +
       '<div class="input-group">' +
-      ' <div class="input-group-btn mr-2">' +
-      '<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
-      'Choose' +
+      ' <div class="input-group-btn">' +
+      '<button type="button" class="btn btn-square btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+      '{{form.to}}' +
       ' </button>' +
       '<div class="dropdown-menu">' +
       ' <a class="dropdown-item" href="#" v-on:click="handleTo" v-for="curr in currencies">{{curr.name}}</a>' +
       '</div>' +
       '</div>' +
-      ' <div class="input-group-btn mr-2">' +
-      '<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
-      'Choose' +
+      ' <div class="input-group-btn">' +
+      '<button type="button" class="btn btn-square btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+      '{{form.from}}' +
       ' </button>' +
       '<div class="dropdown-menu">' +
       ' <a class="dropdown-item" href="#" v-on:click="handleFrom" v-for="curr in currencies">{{curr.name}}</a>' +
       '</div>' +
       '</div>' +
       '<input type="text" class="form-control" v-model="form.amount" aria-label="Text input with dropdown button">' +
+      '<button class="btn btn-primary ml-2" v-on:click="handleConvert">Convert</button>' +
+      '<input class="converted-input form-control ml-2 rounded" v-model="converted" readonly>' +
       '</div>' +
       '</form>'
 });
@@ -93,7 +100,7 @@ var app = new Vue({
   el: '#app',
   data: {
     isAdmin: false,
-    currencies: [{name: 'TEST', rate: 1.6}]
+    currencies: []
   },
   mounted: function () {
     var uri = window.location.search.substring(1);
