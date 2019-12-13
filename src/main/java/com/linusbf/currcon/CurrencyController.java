@@ -10,7 +10,12 @@ public class CurrencyController {
     private CurrencyRepository repository;
 
     @RequestMapping(method=GET, path="/currency")
-    public Currency currencyGet(@RequestParam(value="currency") String name){
+    public Iterable<Currency> currencyGetAll(){
+        return repository.findAll();
+    }
+
+    @RequestMapping(method=GET, path="/currency/{name}")
+    public Currency currencyGet(@PathVariable(value="name") String name){
         return repository.findByName(name).get(0);
     }
 
