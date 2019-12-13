@@ -1,4 +1,7 @@
-package com.linusbf.currcon;
+package com.linusbf.currcon.controller;
+import com.linusbf.currcon.model.ConvertBody;
+import com.linusbf.currcon.model.Currency;
+import com.linusbf.currcon.db.CurrencyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;

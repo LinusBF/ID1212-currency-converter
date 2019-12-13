@@ -1,4 +1,4 @@
-package com.linusbf.currcon;
+package com.linusbf.currcon.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

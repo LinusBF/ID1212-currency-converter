@@ -1,4 +1,4 @@
-package com.linusbf.currcon;
+package com.linusbf.currcon.model;
 
 public class ConvertBody {
     private double amount;

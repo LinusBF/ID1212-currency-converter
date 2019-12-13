@@ -1,4 +1,5 @@
-package com.linusbf.currcon;
+package com.linusbf.currcon.db;
+import com.linusbf.currcon.model.Currency;
 import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 

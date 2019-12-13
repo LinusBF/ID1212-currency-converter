@@ -25,8 +25,8 @@ Vue.component('currency-adder', {
     }
   },
   template: '<form class="w-auto d-flex justify-content-center form-inline">' +
-      '<label>Name:<input class="form-control mr-2" v-model="form.name"></label>' +
-      '<label>Rate:<input class="form-control mr-2" v-model="form.rate"></label>' +
+      '<label>Name: <input class="form-control mr-2" v-model="form.name"></label>' +
+      '<label>Rate: <input class="form-control mr-2" v-model="form.rate"></label>' +
       '<button class="btn btn-primary ml-2" v-on:click="handleAdd">Add Currency</button>' +
       '</form>'
 });

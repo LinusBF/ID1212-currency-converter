@@ -1,4 +1,6 @@
-package com.linusbf.currcon;
+package com.linusbf.currcon.controller;
+
+import com.linusbf.currcon.model.Currency;
 
 public class CurrencyConverter {
     public static double ConvertCurrency(double amount, Currency from, Currency to){
